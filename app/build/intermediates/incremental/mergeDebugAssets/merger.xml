@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="E:\Git\MyRacingPigeon\app\src\main\assets"><file name="databases/PIMS.db" path="E:\Git\MyRacingPigeon\app\src\main\assets\databases\PIMS.db"/><file name="databases/PIMS - ancenstorTest.db" path="E:\Git\MyRacingPigeon\app\src\main\assets\databases\PIMS - ancenstorTest.db"/></source><source path="E:\Git\MyRacingPigeon\app\build\generated\assets\shaders\debug"/></dataSet><dataSet config="debug"><source path="E:\Git\MyRacingPigeon\app\src\debug\assets"/></dataSet></merger>

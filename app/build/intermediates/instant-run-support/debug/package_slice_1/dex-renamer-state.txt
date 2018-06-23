@@ -1,0 +1,4 @@
+#Sat Jun 23 13:56:26 CST 2018
+base.0=E\:\\Git\\MyRacingPigeon\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\1
+path.0=classes.dex
+renamed.0=classes.dex
