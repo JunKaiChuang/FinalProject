@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">賽鴿資料查詢</string>
+    <string name="one">輸入腳環號碼</string>
+    <string name="two">先查詢腳環號碼</string>
+    <string name="titleOne">搜尋</string>
+    <string name="titleTwo">賽鴿資料</string>
+    <string-array name="gender">
+        <item>母</item>
+        <item>公</item>
+    </string-array>
+</resources>

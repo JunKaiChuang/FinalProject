@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TwoFragment">
+
+    <TextView
+        android:id="@+id/textRing"
+        android:includeFontPadding="false"
+        android:textColor="@color/lakeBlue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textOwner"
+        android:layout_centerHorizontal="true"
+        android:text="@string/two"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="144dp"
+        android:layout_height="144dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        android:src="@mipmap/ic_pigeon" />
+
+    <TextView
+        android:id="@+id/textGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:text="Gender"
+        android:textColor="@color/pink"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textBlood"
+        android:textStyle="italic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textRing"
+        android:layout_centerHorizontal="true"
+        android:text="Blood"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/textColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textBlood"
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp"
+        android:text="Color" />
+
+    <TextView
+        android:id="@+id/textOwner"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textGender"
+        android:layout_centerHorizontal="true"
+        android:text="Owner"
+        android:textColor="@color/orange"
+        android:textSize="30dp" />
+
+    <ListView
+        android:id="@+id/listAncestor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textColor"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:focusable="false"
+        android:gravity="center" />
+
+</RelativeLayout>
