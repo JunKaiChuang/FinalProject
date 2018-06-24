@@ -60,6 +60,7 @@ public class TwoFragment extends Fragment {
         mTextOwner.setText("");
         mTextBlood.setText("");
         mTextColor.setText("");
+        mListAncestor.setAdapter(null);
     }
 
     @Override
@@ -76,9 +77,10 @@ public class TwoFragment extends Fragment {
 
     protected void updateDate(String message)
     {
+        ClearText();
         ring = message;
         mTextRing.setText(ring);
-        Toast.makeText(getActivity(), "選擇腳環" + ring, Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), "選擇腳環" + ring, Toast.LENGTH_SHORT).show();
 
         Cursor cursor = pimsDBHelper.getPigeonInfo(ring);
         String gender = cursor.getString(cursor.getColumnIndex("Gender")).equals("0") ? "母" : "公";

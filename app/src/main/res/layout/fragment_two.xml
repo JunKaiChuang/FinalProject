@@ -15,7 +15,7 @@
         android:layout_below="@+id/textOwner"
         android:layout_centerHorizontal="true"
         android:text="@string/two"
-        android:textSize="50sp"
+        android:textSize="45sp"
         android:textStyle="bold" />
 
     <ImageView
@@ -76,6 +76,7 @@
         android:layout_below="@+id/textColor"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
+        android:layout_marginBottom="75dp"
         android:focusable="false"
         android:gravity="center" />
 
