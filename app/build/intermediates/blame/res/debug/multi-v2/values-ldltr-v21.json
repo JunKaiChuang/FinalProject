@@ -1,6 +1,21 @@
 {
     "logs": [
         {
+            "outputFile": "E:\\Git\\FinalProject\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ldltr-v21\\values-ldltr-v21.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Junkai\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\59b0fface87bad93b5db5ef02fad5259\\res\\values-ldltr-v21\\values-ldltr-v21.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "112",
+                        "endOffsets": "163"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "E:\\Git\\MyRacingPigeon\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ldltr-v21\\values-ldltr-v21.xml",
             "map": [
                 {

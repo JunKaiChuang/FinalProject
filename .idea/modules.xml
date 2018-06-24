@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MyRacingPigeon.iml" filepath="$PROJECT_DIR$/MyRacingPigeon.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MyRacingPigeon - 複製.iml" filepath="$PROJECT_DIR$/MyRacingPigeon - 複製.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FinalProject.iml" filepath="$PROJECT_DIR$/FinalProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
