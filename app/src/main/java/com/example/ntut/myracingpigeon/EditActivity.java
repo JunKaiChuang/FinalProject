@@ -70,20 +70,30 @@ public class EditActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             // TODO Auto-generated method stub
-            prepareData();
+            if(!prepareData()){
+                return;
+            }
 
             switch (action){
                 case ACTION_NEW:
-                    if(pimsDBHelper.createPigeon(mPigeon, mPInfo, mDependent)){
+                    try{
+                        pimsDBHelper.createPigeon(mPigeon, mPInfo, mDependent);
                         Toast.makeText(EditActivity.this, mPigeon.Ring + "已新增", Toast.LENGTH_LONG).show();
                         finish();
                     }
+                    catch(Exception e){
+                        Toast.makeText(EditActivity.this, e.toString(), Toast.LENGTH_LONG).show();
+                    }
                     break;
                 case ACTION_EDIT:
-                    if(pimsDBHelper.editPigeon(mPigeon, mPInfo, mDependent)){
-                        Toast.makeText(EditActivity.this, mPigeon.Ring + "已修改", Toast.LENGTH_LONG).show();
-                        finish();
-                    }
+                        try{
+                            pimsDBHelper.editPigeon(mPigeon, mPInfo, mDependent);
+                            Toast.makeText(EditActivity.this, mPigeon.Ring + "已修改", Toast.LENGTH_LONG).show();
+                            finish();
+                        }
+                        catch(Exception e){
+                            Toast.makeText(EditActivity.this, e.toString(), Toast.LENGTH_LONG).show();
+                        }
                     break;
             }
 
@@ -114,7 +124,7 @@ public class EditActivity extends AppCompatActivity {
         mEditRing.setFocusable(false);
     }
 
-    private void prepareData(){
+    private Boolean prepareData(){
 
         mPigeon = new Pigeon();
         mPInfo = new PInfo();
@@ -122,7 +132,7 @@ public class EditActivity extends AppCompatActivity {
 
         if(!checkInput()){
             Toast.makeText(this, "資料未輸入完全", Toast.LENGTH_LONG).show();
-            return;
+            return false;
         }
 
         mPigeon.Ring = mEditRing.getText().toString();
@@ -136,6 +146,7 @@ public class EditActivity extends AppCompatActivity {
         mDependent.Child = mPigeon.Ring;
         mDependent.Father = mEditFather.getText().toString().equals("") ? null : mEditFather.getText().toString();
         mDependent.Mother = mEditMother.getText().toString().equals("") ? null : mEditMother.getText().toString();
+        return true;
     }
 
     private Boolean checkInput(){

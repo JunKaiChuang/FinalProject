@@ -155,7 +155,7 @@ public class DBHelper extends SQLiteAssetHelper {
         }
         catch(Exception e) {
             //Error in between database transaction
-            return false;
+            throw(e);
         }
         finally {
             db.endTransaction();
@@ -201,7 +201,7 @@ public class DBHelper extends SQLiteAssetHelper {
         }
         catch(Exception e) {
             //Error in between database transaction
-            return false;
+            throw(e);
         }
         finally {
             db.endTransaction();
