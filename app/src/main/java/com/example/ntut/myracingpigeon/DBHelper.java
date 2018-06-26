@@ -2,9 +2,12 @@ package com.example.ntut.myracingpigeon;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.os.Environment;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
@@ -27,13 +30,25 @@ public class DBHelper extends SQLiteAssetHelper {
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
-
-    public ArrayList<String> getRingList(String ring) {
 
         SQLiteDatabase db = getReadableDatabase();
+        db.execSQL("PRAGMA foreign_keys=ON");
+    }
 
-        String queryByRing = "select P.Ring from Pigeon P where  P.Ring like '%" + ring + "%'";
+    public void fixCascadeData(){
+        SQLiteDatabase db = getReadableDatabase();
+        db.execSQL("delete from PInfo " +
+                    "where not exists(select 1 from Pigeon p where p.Ring = PInfo.Ring)");
+
+        db.execSQL("delete from Dependent " +
+                "where not exists(select 1 from Pigeon p where p.Ring = Dependent.Child)");
+    }
+
+    public ArrayList<String> getRingList(String ring, String owner) {
+
+        SQLiteDatabase db = getReadableDatabase();
+        String ownerCondition = owner.equals("") ? "" : String.format("I.Owner = '%s' and", owner);
+        String queryByRing = String.format("select P.Ring from Pigeon P join PInfo I on P.Ring = I.Ring where %s (P.Ring like '%%%s%%')", ownerCondition, ring);
         Cursor cursor = db.rawQuery(queryByRing, null);
         cursor.moveToFirst();
         ArrayList<String> mArrayList = new ArrayList<String>();
@@ -153,7 +168,7 @@ public class DBHelper extends SQLiteAssetHelper {
             db.setTransactionSuccessful();
             return  true;
         }
-        catch(Exception e) {
+        catch(SQLException e) {
             //Error in between database transaction
             throw(e);
         }
@@ -199,7 +214,7 @@ public class DBHelper extends SQLiteAssetHelper {
             db.setTransactionSuccessful();
             return  true;
         }
-        catch(Exception e) {
+        catch(SQLException e) {
             //Error in between database transaction
             throw(e);
         }

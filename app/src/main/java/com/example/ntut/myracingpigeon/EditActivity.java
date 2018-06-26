@@ -12,6 +12,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class EditActivity extends AppCompatActivity {
     private static final String ACTION_NEW = "ACTION_NEW", ACTION_EDIT = "ACTION_EDIT";
     private DBHelper pimsDBHelper;
@@ -140,6 +142,11 @@ public class EditActivity extends AppCompatActivity {
         mPigeon.Color = mEditColor.getText().toString();
         mPigeon.Gender = mEditGender.getSelectedItemPosition();
 
+        if(checkRingIsExist(mPigeon.Ring)){
+            Toast.makeText(this, "腳環已存在", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
         mPInfo.Ring = mPigeon.Ring;
         mPInfo.Owner = mEditOwner.getText().toString();
 
@@ -147,6 +154,12 @@ public class EditActivity extends AppCompatActivity {
         mDependent.Father = mEditFather.getText().toString().equals("") ? null : mEditFather.getText().toString();
         mDependent.Mother = mEditMother.getText().toString().equals("") ? null : mEditMother.getText().toString();
         return true;
+    }
+
+    private Boolean checkRingIsExist(String ring){
+        ArrayList<String> result = pimsDBHelper.getRingList(ring, "");
+        if(result.size() == 0) return false;
+        else return  true;
     }
 
     private Boolean checkInput(){

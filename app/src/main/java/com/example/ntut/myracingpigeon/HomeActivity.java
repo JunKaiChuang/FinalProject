@@ -30,6 +30,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.File;
@@ -45,6 +46,7 @@ public class HomeActivity extends AppCompatActivity
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private static final String ACTION_NEW = "ACTION_NEW", ACTION_EDIT = "ACTION_EDIT";
     private EditText mEditSearchRing;
+    private Spinner mEditSpinOwner;
     private DBHelper pimsDBHelper;
     private ListView mResult;
 
@@ -53,6 +55,7 @@ public class HomeActivity extends AppCompatActivity
         super.onResume();
         init();
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +98,7 @@ public class HomeActivity extends AppCompatActivity
 
         //set view to object
         mEditSearchRing = findViewById(R.id.editSearchRing);
+        mEditSpinOwner = findViewById(R.id.editSpinOwner);
         mResult = findViewById(R.id.listPigeons);
 
         //set events
@@ -102,7 +106,7 @@ public class HomeActivity extends AppCompatActivity
 
             @Override
             public void afterTextChanged(Editable s) {
-                reFreshList(s.toString());
+                doSearchRing();
             }
 
             @Override
@@ -139,6 +143,20 @@ public class HomeActivity extends AppCompatActivity
                         })
                         .show();
             }
+        });
+
+        mEditSpinOwner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+                doSearchRing();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
         });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabAdd);
@@ -206,6 +224,8 @@ public class HomeActivity extends AppCompatActivity
             backupDB();
         } else if (id == R.id.nav_import) {
             Toast.makeText(this, "功能尚未開放", Toast.LENGTH_LONG).show();
+        } else if (id == R.id.nav_fix_cascade) {
+            pimsDBHelper.fixCascadeData();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -213,14 +233,24 @@ public class HomeActivity extends AppCompatActivity
         return true;
     }
 
-    private void reFreshList(String ring){
-        ArrayList<String> result = pimsDBHelper.getRingList(ring);
-        mResult.setAdapter(new ArrayAdapter<String>(getBaseContext(), R.layout.my_listview, result));
+    private void init(){
+        //set owner list
+        ArrayList<String> result = pimsDBHelper.getOwnerList();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(HomeActivity.this, R.layout.spinner_owner_list, result);
+        //設置下拉列表的風格
+        adapter.setDropDownViewResource(R.layout.spinner_owner_list);
+        mEditSpinOwner.setAdapter(adapter);
+        mEditSearchRing.setText("");
+        doSearchRing();
     }
 
-    private void init(){
-        mEditSearchRing.setText("");
-        reFreshList("");
+    private void doSearchRing(){
+        String ring = mEditSearchRing.getText().toString();
+        String owner = mEditSpinOwner.getSelectedItem().toString();
+        if(ring.length() >= 0){
+            ArrayList<String> result = pimsDBHelper.getRingList(ring, owner);
+            mResult.setAdapter(new ArrayAdapter<String>(HomeActivity.this, R.layout.my_listview, result));
+        }
     }
 
     @Override
