@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,11 +33,19 @@ import java.util.ArrayList;
 public class OneFragment extends Fragment {
     SendMessage SM;
     private EditText mSeacrhRing;
+    private Spinner mSpinOwner;
     private ListView mResult;
     private DBHelper pimsDBHelper;
 
     public OneFragment() {
         // Required empty public constructor
+    }
+
+    private void init(){
+        //set owner list
+        ArrayList<String> result = pimsDBHelper.getOwnerList();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, result);
+        mSpinOwner.setAdapter(adapter);
     }
 
     @Override
@@ -51,6 +61,7 @@ public class OneFragment extends Fragment {
         View mView = inflater.inflate(R.layout.fragment_one, container, false);
         mSeacrhRing = mView.findViewById(R.id.searchRing);
         mResult = mView.findViewById(R.id.searchResult);
+        mSpinOwner = mView.findViewById(R.id.spinOwner);
 
         mSeacrhRing.addTextChangedListener(new TextWatcher() {
 
@@ -87,7 +98,7 @@ public class OneFragment extends Fragment {
             }
         });
 
-
+        init();
         // Inflate the layout for this fragment
         return mView;
     }

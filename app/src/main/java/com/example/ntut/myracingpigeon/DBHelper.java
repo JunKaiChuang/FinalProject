@@ -241,4 +241,28 @@ public class DBHelper extends SQLiteAssetHelper {
         cursor.moveToFirst();
         return cursor;
     }
+
+    public ArrayList<String> getOwnerList(){
+        SQLiteDatabase db = getReadableDatabase();
+
+        String queryByRing = "select Owner " +
+                "from PInfo " +
+                "Group by Owner";
+        Cursor cursor = db.rawQuery(queryByRing, null);
+        cursor.moveToFirst();
+        ArrayList<String> mArrayList = new ArrayList<String>();
+
+        //first data set empty string
+        mArrayList.add("");
+
+        if(cursor.getCount() == 0) return mArrayList;
+
+        do{
+            mArrayList.add(cursor.getString(0));
+        }
+        while(cursor.moveToNext());
+
+        cursor.close();
+        return mArrayList;
+    }
 }
