@@ -35,6 +35,31 @@ public class DBHelper extends SQLiteAssetHelper {
         db.execSQL("PRAGMA foreign_keys=ON");
     }
 
+    public ArrayList<String> getSibling(int parent, String ring){
+
+        SQLiteDatabase db = getReadableDatabase();
+        String strParent = parent == 0 ? "Mother" : "Father";
+
+        String query = String.format("select dd.Child " +
+                "from Dependent D " +
+                "join Dependent dd on D.%s = dd.%s " +
+                "where D.Child = '%s' " +
+                "and dd.Child <> D.Child", strParent, strParent, ring);
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        ArrayList<String> mArrayList = new ArrayList<String>();
+
+        if(cursor.getCount() == 0) return mArrayList;
+
+        do{
+            mArrayList.add(cursor.getString(0));
+        }
+        while(cursor.moveToNext());
+
+        cursor.close();
+        return mArrayList;
+    }
+
     public void fixCascadeData(){
         SQLiteDatabase db = getReadableDatabase();
         db.execSQL("delete from PInfo " +

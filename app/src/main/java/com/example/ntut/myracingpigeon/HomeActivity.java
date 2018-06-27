@@ -56,7 +56,6 @@ public class HomeActivity extends AppCompatActivity
         init();
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

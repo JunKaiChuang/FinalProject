@@ -36,6 +36,25 @@ public class MainActivity extends AppCompatActivity implements OneFragment.SendM
             R.drawable.ic_tab_pigeon
     };
 
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setTitle("離開賽鴿資料查詢")
+                .setMessage("確定要關閉程式?")
+                .setNegativeButton("是", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                })
+                .setPositiveButton("否", null)
+                .show();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.actionEdit) {
